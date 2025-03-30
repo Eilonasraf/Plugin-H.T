@@ -40,7 +40,8 @@ class DummyJSONPlugin(BasePlugin):
             response.raise_for_status()
             return True, "Connected successfully"
         except requests.HTTPError as e:
-            return False, f"Auth failed: {e.response.text}"
+            status_code = e.response.status_code
+            return False, f"HTTP Error {status_code}: {e.response.text}"
         except requests.RequestException as e:
             return False, f"Connection error: {str(e)}"
             
@@ -94,8 +95,8 @@ if __name__ == "__main__":
         # If connectivity passes, collect the evidence.
         evidence = plugin.collect_evidence()
         
-        # E1: Print User Details in a readable format.
-        # organizing the output in a readable format
+        # E1: Print User Details
+        # Organizing the output in a readable format
         print("\nE1 - User Details:")
         user_details = evidence.get("user")
         if user_details:
@@ -104,7 +105,7 @@ if __name__ == "__main__":
             print("No user details found.")
         
         # E2: Print a summary of the 60 posts.
-        # Print in a readable format.
+        # Organizing the output in a readable format
         print("\nE2 - 60 Posts:")
         posts_data = evidence.get("posts")
         if posts_data and "posts" in posts_data:
@@ -114,7 +115,7 @@ if __name__ == "__main__":
             print("No posts found.")
         
         # E3: Print each post with its comments.
-        # Print in a readable format.
+        # Organizing the output in a readable format
         print("\nE3 - Posts with Comments:")
         posts_with_comments = evidence.get("posts_with_comments")
         if posts_with_comments:
@@ -127,3 +128,6 @@ if __name__ == "__main__":
                     print(f"    - {comment.get('body', 'No content')}")
         else:
             print("No posts with comments found.")
+
+    else:
+        print("Error: Connectivity test failed. Details:", message)
