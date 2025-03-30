@@ -124,7 +124,9 @@ if __name__ == "__main__":
                 comments = post.get("comments", [])
                 print(f"  Comments ({len(comments)}):")
                 for comment in comments:
-                    # Assuming each comment has a 'body' field. Adjust as necessary.
+                    # Displaying the comment body
+                    # If the comment body is empty, display "No content"
+                    # Otherwise, display the comment body
                     print(f"    - {comment.get('body', 'No content')}")
         else:
             print("No posts with comments found.")
