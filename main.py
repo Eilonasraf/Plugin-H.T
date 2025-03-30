@@ -130,4 +130,5 @@ if __name__ == "__main__":
             print("No posts with comments found.")
 
     else:
-        print("Error: Connectivity test failed. Details:", message)
+        print("Please double-check your credentials and ensure your network is working properly.")
+
